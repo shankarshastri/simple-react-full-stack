@@ -8,20 +8,34 @@ import Routes from './Routes';
 export class App extends Component {
   constructor(props) {
     super(props);
+    const session = JSON.parse(window.sessionStorage.getItem('userSession'));
+    if (session !== null) {
+      this.state = {
+        isAuthenticated: session.isAuthenticated,
+        isAdmin: session.isAdmin,
+        userName: session.userName
+      };
+    } else {
+      this.state = {
+        isAuthenticated: false,
+        isAdmin: false,
+        userName: ''
+      };
+    }
+  }
 
-    this.state = {
-      isAuthenticated: false,
-      isAdmin: false,
-      userName: ''
-    };
+  componentDidMount() {
+    // TODO Add OnBeforeUnload
   }
 
 userHasAuthenticated = (json, props, name) => {
-  this.setState({
+  const session = {
     isAuthenticated: json.isAuthenticated || false,
     isAdmin: json.isAdmin || false,
     userName: name || ''
-  });
+  };
+  this.setState(session);
+  window.sessionStorage.setItem('userSession', JSON.stringify(session));
   if (json.isAuthenticated) {
     return (json.isAdmin) ? props.history.push('/admin') : props.history.push('/customer');
   }
@@ -56,7 +70,7 @@ renderButtonForAdmin() {
 }
 
 renderNavButtonOnAuth() {
-  return (this.state.isAdmin)? this.renderButtonForAdmin() : this.renderButtonsForCustomer();
+  return (this.state.isAdmin) ? this.renderButtonForAdmin() : this.renderButtonsForCustomer();
 }
 
 renderButtonsOnLogin() {
@@ -76,6 +90,7 @@ renderButtonsOnLogin() {
 handleLogout = (event, props) => {
   const json = { isAuthenticated: false, isAdmin: false };
   this.userHasAuthenticated(json, props);
+  window.sessionStorage.removeItem('userSession');
   props.history.push('/login');
 }
 
