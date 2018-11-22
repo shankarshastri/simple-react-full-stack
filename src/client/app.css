@@ -1,8 +1,11 @@
-h1 {
-  color: green;
+.App {
+  margin-top: 15px;
+}
+
+.App .navbar-brand {
+  font-weight: bold;
 }
 
 body {
-  text-align: center;
-  margin: auto;
+	background: cornsilk;
 }
