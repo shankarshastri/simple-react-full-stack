@@ -11,7 +11,7 @@ export const login = (username, password, props, errorHandler) => fetch('/api/lo
   })
 }).then(response => Promise.all([response.ok, response.json()])).then(([respOk, json]) => {
   if (respOk) {
-    props.userHasAuthenticated(json, props);
+    props.userHasAuthenticated(json, props, username);
   } else {
     errorHandler(json.message);
   }

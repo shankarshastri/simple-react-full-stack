@@ -8,7 +8,7 @@ import Signup from './containers/Signup';
 import Customer from './containers/Customer';
 import Admin from './containers/Admin';
 
-
+//TODO use userHasAuthenticated flag to redirect back to respective admin or customer
 export default ({ childProps }) => (
   <Switch>
     <AppliedRoute path="/" exact component={Home} props={childProps} />

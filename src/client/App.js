@@ -11,14 +11,16 @@ export class App extends Component {
 
     this.state = {
       isAuthenticated: false,
-      isAdmin: false
+      isAdmin: false,
+      userName: ''
     };
   }
 
-userHasAuthenticated = (json, props) => {
+userHasAuthenticated = (json, props, name) => {
   this.setState({
     isAuthenticated: json.isAuthenticated || false,
-    isAdmin: json.isAdmin || false
+    isAdmin: json.isAdmin || false,
+    userName: name || ''
   });
   if (json.isAuthenticated) {
     return (json.isAdmin) ? props.history.push('/admin') : props.history.push('/customer');
@@ -38,10 +40,18 @@ renderHeaderText = () => {
   return 'Hair Salon';
 }
 
+getLinkPath() {
+  if (this.state.isAuthenticated) {
+    return (this.state.isAdmin) ? '/admin' : '/customer';
+  }
+  return '/';
+}
+
 render() {
   const childProps = {
     isAuthenticated: this.state.isAuthenticated,
-    userHasAuthenticated: this.userHasAuthenticated
+    userHasAuthenticated: this.userHasAuthenticated,
+    userName: this.state.userName
   };
 
   return (
@@ -49,7 +59,7 @@ render() {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">{this.renderHeaderText()}</Link>
+            <Link to={this.getLinkPath()}>{this.renderHeaderText()}</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

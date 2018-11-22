@@ -7,7 +7,9 @@ export default class Admin extends Component {
       <div className="Home">
         <div className="lander">
           <h1>Hair Salon</h1>
-          <p>Welcome Admin</p>
+          <p>
+            {`Welcome ${this.props.userName}`}
+          </p>
         </div>
       </div>
     );
