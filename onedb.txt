@@ -28,15 +28,15 @@ CREATE TABLE Stylists
     FOREIGN KEY (style_name) REFERENCES Styles(style_name)
 );
 
-CREATE TABLE CustomerBooking 
+CREATE TABLE CustomerBooking
 (
+   booking_id varchar(15),
    user_name varchar(15),
    stylist_name varchar(20),
    style_name varchar(20),
-   booking_date DATE,
-   booking_time TIME,
+   booking_date varchar(30),
    stylist_rating integer,
-   PRIMARY KEY (user_name),
+   PRIMARY KEY (booking_id),
    UNIQUE(stylist_name),
    UNIQUE(style_name),
    FOREIGN KEY (user_name) REFERENCES Customer(user_name),

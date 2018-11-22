@@ -6,6 +6,7 @@ const customerHandler = require('./routes/customer');
 const loginHandler = require('./routes/login');
 const stylistHandler = require('./routes/stylists');
 const styleHandler = require('./routes/style');
+const bookingHandler = require('./routes/booking');
 
 const app = express();
 
@@ -31,6 +32,11 @@ app.get('/api/stylist', stylistHandler.stylistsGet);
 // Style Routes
 app.post('/api/style', styleHandler.stylePost);
 app.get('/api/style', styleHandler.styleGet);
+
+//Booking routes
+app.post('/api/booking', bookingHandler.bookingInsert);
+app.put('/api/booking', bookingHandler.ratingUpdate);
+app.get('/api/booking/:username', bookingHandler.getBookings);
 
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).send({

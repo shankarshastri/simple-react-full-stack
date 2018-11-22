@@ -11,7 +11,12 @@ const stylistGet = 'SELECT * from Stylists';
 const styleInsert = 'INSERT INTO Styles(style_name, duration, rates) VALUES(?,?,?)';
 const styleUpdate = 'UPDATE Styles SET duration=?, rates=? WHERE style_name=?';
 const styleDelete = 'DELETE FROM Styles Where style_name=?';
-const styleGet = 'SELECT * from Styles';
+const styleGet = 'SELECT * FROM Styles';
+
+const bookingGet = 'SELECT * FROM CustomerBooking WHERE user_name=?';
+const bookingInsert = 'INSERT INTO CustomerBooking(booking_id, user_name, stylist_name, style_name, booking_date, stylist_rating) VALUES(?,?,?,?,?,?)';
+const bookingUpdateRating = 'UPDATE CustomerBooking SET stylist_rating=? WHERE booking_id=?';
+
 
 module.exports = {
   customerInsert,
@@ -25,5 +30,8 @@ module.exports = {
   styleInsert,
   styleGet,
   styleUpdate,
-  styleDelete
+  styleDelete,
+  bookingGet,
+  bookingInsert,
+  bookingUpdateRating
 };

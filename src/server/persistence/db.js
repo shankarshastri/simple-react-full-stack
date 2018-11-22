@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const uuidv4 = require('uuid/v4');
 const DbQueryStatements = require('./DbQueryStatement');
 
 const connection = mysql.createConnection({
@@ -134,6 +135,54 @@ module.exports = {
           error,
           statusCode: 400,
           message: 'Style Already Exists'
+        };
+        next(errorObj);
+      } else {
+        res.set({ 'Content-Type': 'application/json' });
+        res.send({ query: 'success' });
+      }
+    });
+  },
+  insertBooking(data, res, next) {
+    const inserts = [uuidv4(), data.user_name, data.stylist_name, data.style_name,
+      data.booking_date, data.stylist_rating];
+    const cmd = mysql.format(DbQueryStatements.bookingInsert, inserts);
+    connection.query(cmd, (error, results) => {
+      if (error) {
+        const errorObj = {
+          error,
+          statusCode: 400,
+          message: 'Booking Insert Failed'
+        };
+        next(errorObj);
+      } else {
+        res.set({ 'Content-Type': 'application/json' });
+        res.send({ query: 'success' });
+      }
+    });
+  },
+  getAllBookingForUser(data, res) {
+    const { username } = data;
+    const cmd = mysql.format(DbQueryStatements.bookingGet, username);
+    connection.query(cmd, (error, results) => {
+      if (error) {
+        res.set({ 'Content-Type': 'application/json' });
+        res.send([]);
+      } else {
+        res.set({ 'Content-Type': 'application/json' });
+        res.send(JSON.stringify(results));
+      }
+    });
+  },
+  updateRating(data, res, next) {
+    const bookingId = data.booking_id;
+    const cmd = mysql.format(DbQueryStatements.bookingUpdateRating, bookingId);
+    connection.query(cmd, (error, results) => {
+      if (error) {
+        const errorObj = {
+          error,
+          statusCode: 400,
+          message: 'Booking Update Failed'
         };
         next(errorObj);
       } else {
