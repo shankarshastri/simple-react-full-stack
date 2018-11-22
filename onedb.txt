@@ -1,0 +1,59 @@
+CREATE DATABASE HairSalon;
+USE HairSalon;
+CREATE TABLE Customer
+(
+    fname varchar(20),
+    lname varchar(20),
+    email varchar(40),
+    user_name varchar(15),
+    password varchar(15),
+    isadmin boolean,
+    PRIMARY KEY (user_name)
+);
+
+CREATE TABLE Styles
+(
+    style_name varchar(20),
+    duration integer,
+    rates integer,
+    PRIMARY KEY (style_name)
+);
+
+CREATE TABLE Stylists
+(
+    stylist_name varchar(20),
+    style_name varchar(20),
+    ratings integer,
+    PRIMARY KEY (stylist_name, style_name),
+    FOREIGN KEY (style_name) REFERENCES Styles(style_name)
+);
+
+CREATE TABLE CustomerBooking 
+(
+   user_name varchar(15),
+   stylist_name varchar(20),
+   style_name varchar(20),
+   booking_date DATE,
+   booking_time TIME,
+   stylist_rating integer,
+   PRIMARY KEY (user_name),
+   UNIQUE(stylist_name),
+   UNIQUE(style_name),
+   FOREIGN KEY (user_name) REFERENCES Customer(user_name),
+   FOREIGN KEY (stylist_name) REFERENCES Stylists(stylist_name),
+   FOREIGN KEY (style_name) REFERENCES Styles(style_name)
+);
+
+CREATE TABLE AvgRating
+(
+    stylist_name varchar(20),
+    avg_rating integer,
+    FOREIGN KEY (stylist_name) REFERENCES Stylists(stylist_name)
+);
+
+CREATE TABLE LoginSession
+(
+    user_name varchar(15),
+    PRIMARY KEY(user_name),
+    FOREIGN KEY(user_name) REFERENCES Customer(user_name)
+);
