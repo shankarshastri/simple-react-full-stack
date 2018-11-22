@@ -27,6 +27,52 @@ userHasAuthenticated = (json, props, name) => {
   }
 }
 
+renderButtonsForCustomer() {
+  return (
+    <Fragment>
+      <LinkContainer to="/customer/addBooking">
+        <NavItem>Add New Booking</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/customer/currentBooking">
+        <NavItem>Current Booking</NavItem>
+      </LinkContainer>
+      <NavItem onClick={event => this.handleLogout(event, this.props)}>Logout</NavItem>
+    </Fragment>
+  );
+}
+
+renderButtonForAdmin() {
+  return (
+    <Fragment>
+      <LinkContainer to="/admin/stylist">
+        <NavItem>Stylists</NavItem>
+      </LinkContainer>
+      <LinkContainer to="/admin/styles">
+        <NavItem>Styles</NavItem>
+      </LinkContainer>
+      <NavItem onClick={event => this.handleLogout(event, this.props)}>Logout</NavItem>
+    </Fragment>
+  );
+}
+
+renderNavButtonOnAuth() {
+  return (this.state.isAdmin)? this.renderButtonForAdmin() : this.renderButtonsForCustomer();
+}
+
+renderButtonsOnLogin() {
+  return (this.state.isAuthenticated
+    ? this.renderNavButtonOnAuth()
+    : (
+      <Fragment>
+        <LinkContainer to="/signup">
+          <NavItem>Signup</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/login">
+          <NavItem>Login</NavItem>
+        </LinkContainer>
+      </Fragment>));
+}
+
 handleLogout = (event, props) => {
   const json = { isAuthenticated: false, isAdmin: false };
   this.userHasAuthenticated(json, props);
@@ -65,19 +111,7 @@ render() {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {this.state.isAuthenticated
-              ? <NavItem onClick={event => this.handleLogout(event, this.props)}>Logout</NavItem>
-              : (
-                <Fragment>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-              )
-  }
+            {this.renderButtonsOnLogin()}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

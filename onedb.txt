@@ -37,8 +37,6 @@ CREATE TABLE CustomerBooking
    booking_date varchar(30),
    stylist_rating integer,
    PRIMARY KEY (booking_id),
-   UNIQUE(stylist_name),
-   UNIQUE(style_name),
    FOREIGN KEY (user_name) REFERENCES Customer(user_name),
    FOREIGN KEY (stylist_name) REFERENCES Stylists(stylist_name),
    FOREIGN KEY (style_name) REFERENCES Styles(style_name)
@@ -57,3 +55,56 @@ CREATE TABLE LoginSession
     PRIMARY KEY(user_name),
     FOREIGN KEY(user_name) REFERENCES Customer(user_name)
 );
+
+
+
+// Custom SQL
+INSERT INTO `HairSalon`.`Styles`
+(`style_name`,
+`duration`,
+`rates`)
+VALUES
+('pedicure', 2, 200);
+
+INSERT INTO `HairSalon`.`Styles`
+(`style_name`,
+`duration`,
+`rates`)
+VALUES
+('manicure', 2, 200);
+
+INSERT INTO `HairSalon`.`Stylists`
+(`stylist_name`,
+`style_name`,
+`ratings`)
+VALUES
+('shalini', 'pedicure', -1);
+
+INSERT INTO `HairSalon`.`Stylists`
+(`stylist_name`,
+`style_name`,
+`ratings`)
+VALUES
+('shalini', 'manicure', -1);
+
+
+INSERT INTO `HairSalon`.`CustomerBooking`
+(`booking_id`,
+`user_name`,
+`stylist_name`,
+`style_name`,
+`booking_date`,
+`stylist_rating`)
+VALUES
+('1', 'shanrc', 'shalini', 'pedicure', '2018', -1);
+
+
+INSERT INTO `HairSalon`.`CustomerBooking`
+(`booking_id`,
+`user_name`,
+`stylist_name`,
+`style_name`,
+`booking_date`,
+`stylist_rating`)
+VALUES
+('2', 'shanrc', 'shalini', 'manicure', '2018', -1);

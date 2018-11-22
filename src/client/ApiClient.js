@@ -37,3 +37,15 @@ export const createCustomer = (customerObj, errorHandler) => fetch('/api/custome
       errorHandler(respOk, 'Customer Added Successfully');
     } else errorHandler(respOk, json.message || 'Failed To Add Customer');
   });
+
+export const getCustomerBooking = (userName, handler) => fetch(`/api/booking/${userName}`, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  }
+}).then(response => response.json())
+  .then((json) => {
+    console.log(json);
+    return handler(json || []);
+  }).catch(() => handler([]));
