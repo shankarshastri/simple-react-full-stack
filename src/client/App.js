@@ -18,10 +18,10 @@ export class App extends Component {
 userHasAuthenticated = (json, props) => {
   this.setState({
     isAuthenticated: json.isAuthenticated || false,
-    isAdmin: json.isadmin || false
+    isAdmin: json.isAdmin || false
   });
   if (json.isAuthenticated) {
-    props.history.push('/');
+    return (json.isAdmin) ? props.history.push('/admin') : props.history.push('/customer');
   }
 }
 
@@ -29,6 +29,13 @@ handleLogout = (event, props) => {
   const json = { isAuthenticated: false, isAdmin: false };
   this.userHasAuthenticated(json, props);
   props.history.push('/login');
+}
+
+renderHeaderText = () => {
+  if (this.state.isAuthenticated) {
+    return (this.state.isAdmin) ? 'Admin Dashboard' : 'Customer Dashboard';
+  }
+  return 'Hair Salon';
 }
 
 render() {
@@ -42,7 +49,7 @@ render() {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Hair Salon</Link>
+            <Link to="/">{this.renderHeaderText()}</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
