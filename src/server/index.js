@@ -40,7 +40,7 @@ app.get('/api/booking/:username', bookingHandler.getBookings);
 
 app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).send({
-    errMessage: err.message
+    message: err.message
   });
 });
 app.listen(8080, () => console.log('Listening on port 8080!'));

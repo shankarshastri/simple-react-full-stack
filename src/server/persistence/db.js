@@ -123,7 +123,7 @@ module.exports = {
         resp.send([]);
       } else {
         resp.set({ 'Content-Type': 'application/json' });
-        resp.send(JSON.stringify(results));
+        resp.send(JSON.stringify(results[0]));
       }
     });
   },

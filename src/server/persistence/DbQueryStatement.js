@@ -10,7 +10,7 @@ const stylistGet = 'SELECT stylist_name, phone_number, email, (SELECT avg_rating
 const styleInsert = 'INSERT INTO Styles(style_name, duration, rates) VALUES(?,?,?)';
 const styleUpdate = 'UPDATE Styles SET duration=?, rates=? WHERE style_name=?';
 const styleDelete = 'DELETE FROM Styles Where style_name=?';
-const styleGet = 'SELECT * FROM Styles';
+const styleGet = 'CALL getStyles()';
 
 const bookingGet = 'SELECT * FROM CustomerBooking WHERE user_name=?';
 const bookingInsert = 'INSERT INTO CustomerBooking(booking_id, user_name, stylist_name, style_name, booking_date, stylist_rating) VALUES(?,?,?,?,?,?)';

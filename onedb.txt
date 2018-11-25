@@ -48,6 +48,8 @@ CREATE TABLE AvgRating
     FOREIGN KEY (stylist_name) REFERENCES Stylists(stylist_name)
 );
 
+
+# Triggers
 delimiter #
 CREATE TRIGGER insertIntoAvgRating
 AFTER INSERT ON Stylists
@@ -68,6 +70,18 @@ FOR EACH ROW
    WHERE stylist_name = NEW.stylist_name;
    END#
 delimiter ;
+
+# Stored Procedure
+
+Delimiter //
+Create Procedure getStyles()
+BEGIN
+SELECT * FROM Styles;
+END//
+Delimiter ;
+
+
+# Custom Data
 
 INSERT INTO `HairSalon`.`Styles`
 (`style_name`,
