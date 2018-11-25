@@ -31,7 +31,7 @@ export default class AdminGetStyles extends Component {
 
   renderTable() {
     return (
-      <Table striped bordered condensed hover>
+      <Table striped bordered condensed hover responsive>
         <thead>
           <tr>
             <th>Style Name</th>

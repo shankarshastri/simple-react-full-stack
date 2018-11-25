@@ -57,7 +57,7 @@ export default class CustomerCurrentBooking extends Component {
 
   renderTable() {
     return (
-      <Table striped bordered condensed hover>
+      <Table striped bordered condensed hover responsive>
         <thead>
           <tr>
             <th>Booking Date</th>
