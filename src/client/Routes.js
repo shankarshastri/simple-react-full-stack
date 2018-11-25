@@ -9,11 +9,16 @@ import Customer from './containers/Customer';
 import Admin from './containers/Admin';
 import CustomerBooking from './containers/CustomerAddBooking';
 import CustomerCurrentBooking from './containers/CustomerCurrentBooking';
+import AdminAddStyles from './containers/AdminAddStyles';
+import AdminAddStylist from './containers/AdminAddStylist';
 
 export default ({ childProps }) => (
   <Switch>
     <AppliedRoute path="/" exact component={Home} props={childProps} />
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
+    <AppliedRoute path="/admin" exact component={Admin} props={childProps} />
+    <AppliedRoute path="/admin/styles" exact component={AdminAddStyles} props={childProps} />
+    <AppliedRoute path="/admin/stylist" exact component={AdminAddStylist} props={childProps} />
     <AppliedRoute path="/admin" exact component={Admin} props={childProps} />
     <AppliedRoute path="/customer" exact component={Customer} props={childProps} />
     <AppliedRoute path="/customer/addBooking" exact component={CustomerBooking} props={childProps} />

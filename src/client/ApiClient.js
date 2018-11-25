@@ -49,3 +49,57 @@ export const getCustomerBooking = (userName, handler) => fetch(`/api/booking/${u
     console.log(json);
     return handler(json || []);
   }).catch(() => handler([]));
+
+
+export const createBooking = (bookingObj, errorHandler) => fetch('/api/booking', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    user_name: bookingObj.user_name,
+    stylist_name: bookingObj.stylist_name,
+    style_name: bookingObj.style_name,
+    booking_date: bookingObj.booking_date,
+    stylist_rating: -1
+  })
+}).then(response => Promise.all([response.ok, response.json()]))
+  .then(([respOk, json]) => {
+    if (respOk) {
+      errorHandler(respOk, 'Booking Confirmed');
+    } else errorHandler(respOk, json.message || 'Failed To Add Booking');
+  });
+
+export const getStylists = handler => fetch('/api/stylist', {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  }
+}).then(response => response.json())
+  .then((json) => {
+    console.log(json);
+    return handler(json || []);
+  }).catch(() => handler([]));
+
+export const getStyles = handler => fetch('/api/style', {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  }
+}).then(response => response.json())
+  .then((json) => {
+    console.log(json);
+    return handler(json || []);
+  }).catch(() => handler([]));
+
+export const updateRating = (booking_id, stylist_rating) => fetch('/api/booking', {
+  method: 'PUT',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ stylist_rating, booking_id })
+}).catch(() => {});

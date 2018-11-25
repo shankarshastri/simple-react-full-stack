@@ -3,9 +3,9 @@ const customerUpdate = 'UPDATE Customer SET fname=?, lname=?, email=?, password=
 const customerGet = 'SELECT fname, lname, email, user_name, isadmin from Customer WHERE user_name=?';
 const customerGetForLogin = 'SELECT user_name, password, isadmin from Customer WHERE user_name=?';
 
-const stylistInsert = 'INSERT INTO Stylists(stylist_name, style_name, ratings) VALUES(?, ?, ?)';
+const stylistInsert = 'INSERT INTO Stylists(stylist_name, ratings) VALUES(?, ?)';
 const stylistUpdate = 'UPDATE Stylists SET ratings=? WHERE stylist_name=? AND style_name=?';
-const stylistDelete = 'DELETE FROM Stylists WHERE stylist_name=? AND style_name=?';
+const stylistDelete = 'DELETE FROM Stylists WHERE stylist_name=?';
 const stylistGet = 'SELECT * from Stylists';
 
 const styleInsert = 'INSERT INTO Styles(style_name, duration, rates) VALUES(?,?,?)';

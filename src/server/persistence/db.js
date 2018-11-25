@@ -100,7 +100,7 @@ module.exports = {
     });
   },
   insertStylist(data, res, next) {
-    const inserts = [data.stylist_name, data.style_name, data.ratings];
+    const inserts = [data.stylist_name, data.ratings];
     const cmd = mysql.format(DbQueryStatements.stylistInsert, inserts);
     connection.query(cmd, (error, results) => {
       if (error) {
@@ -144,8 +144,10 @@ module.exports = {
     });
   },
   insertBooking(data, res, next) {
+    console.log(data);
     const inserts = [uuidv4(), data.user_name, data.stylist_name, data.style_name,
       data.booking_date, data.stylist_rating];
+    console.log(inserts);
     const cmd = mysql.format(DbQueryStatements.bookingInsert, inserts);
     connection.query(cmd, (error, results) => {
       if (error) {
@@ -154,6 +156,7 @@ module.exports = {
           statusCode: 400,
           message: 'Booking Insert Failed'
         };
+        console.log(error);
         next(errorObj);
       } else {
         res.set({ 'Content-Type': 'application/json' });
@@ -175,14 +178,14 @@ module.exports = {
     });
   },
   updateRating(data, res, next) {
-    const bookingId = data.booking_id;
-    const cmd = mysql.format(DbQueryStatements.bookingUpdateRating, bookingId);
+    const updates = [data.stylist_rating, data.booking_id];
+    const cmd = mysql.format(DbQueryStatements.bookingUpdateRating, updates);
     connection.query(cmd, (error, results) => {
       if (error) {
         const errorObj = {
           error,
           statusCode: 400,
-          message: 'Booking Update Failed'
+          message: 'Rating Update Failed'
         };
         next(errorObj);
       } else {

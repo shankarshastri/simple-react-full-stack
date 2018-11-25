@@ -48,7 +48,7 @@ renderButtonsForCustomer() {
         <NavItem>Add New Booking</NavItem>
       </LinkContainer>
       <LinkContainer to="/customer/currentBooking">
-        <NavItem>Current Booking</NavItem>
+        <NavItem>Booking History</NavItem>
       </LinkContainer>
       <NavItem onClick={event => this.handleLogout(event, this.props)}>Logout</NavItem>
     </Fragment>
@@ -59,10 +59,10 @@ renderButtonForAdmin() {
   return (
     <Fragment>
       <LinkContainer to="/admin/stylist">
-        <NavItem>Stylists</NavItem>
+        <NavItem>Add Stylists</NavItem>
       </LinkContainer>
       <LinkContainer to="/admin/styles">
-        <NavItem>Styles</NavItem>
+        <NavItem>Add Styles</NavItem>
       </LinkContainer>
       <NavItem onClick={event => this.handleLogout(event, this.props)}>Logout</NavItem>
     </Fragment>

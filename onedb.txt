@@ -22,19 +22,17 @@ CREATE TABLE Styles
 CREATE TABLE Stylists
 (
     stylist_name varchar(20),
-    style_name varchar(20),
     ratings integer,
-    PRIMARY KEY (stylist_name, style_name),
-    FOREIGN KEY (style_name) REFERENCES Styles(style_name)
+    PRIMARY KEY (stylist_name)
 );
 
 CREATE TABLE CustomerBooking
 (
-   booking_id varchar(15),
+   booking_id varchar(40),
    user_name varchar(15),
    stylist_name varchar(20),
    style_name varchar(20),
-   booking_date varchar(30),
+   booking_date varchar(150),
    stylist_rating integer,
    PRIMARY KEY (booking_id),
    FOREIGN KEY (user_name) REFERENCES Customer(user_name),
@@ -75,17 +73,55 @@ VALUES
 
 INSERT INTO `HairSalon`.`Stylists`
 (`stylist_name`,
-`style_name`,
 `ratings`)
 VALUES
-('shalini', 'pedicure', -1);
+('shaliniRC', -1);
 
 INSERT INTO `HairSalon`.`Stylists`
 (`stylist_name`,
-`style_name`,
 `ratings`)
 VALUES
-('shalini', 'manicure', -1);
+('shankarRC', -1);
+
+INSERT INTO `HairSalon`.`Customer`
+(`fname`,
+`lname`,
+`email`,
+`user_name`,
+`password`,
+`isadmin`)
+VALUES
+('shankar',
+'shastri',
+'shanrc@cisco.com',
+'shanrc',
+'shanrc',
+true);
+
+INSERT INTO `HairSalon`.`Customer`
+(`fname`,
+`lname`,
+`email`,
+`user_name`,
+`password`,
+`isadmin`)
+VALUES
+('shalini',
+'shastri',
+'shalini@cisco.com',
+'shalini',
+'shalini',
+false);
+
+INSERT INTO `HairSalon`.`CustomerBooking`
+(`booking_id`,
+`user_name`,
+`stylist_name`,
+`style_name`,
+`booking_date`,
+`stylist_rating`)
+VALUES
+('1', 'shanrc', 'shaliniRC', 'pedicure', '2018', -1);
 
 
 INSERT INTO `HairSalon`.`CustomerBooking`
@@ -96,15 +132,4 @@ INSERT INTO `HairSalon`.`CustomerBooking`
 `booking_date`,
 `stylist_rating`)
 VALUES
-('1', 'shanrc', 'shalini', 'pedicure', '2018', -1);
-
-
-INSERT INTO `HairSalon`.`CustomerBooking`
-(`booking_id`,
-`user_name`,
-`stylist_name`,
-`style_name`,
-`booking_date`,
-`stylist_rating`)
-VALUES
-('2', 'shanrc', 'shalini', 'manicure', '2018', -1);
+('2', 'shanrc', 'shaliniRC', 'manicure', '2018', -1);
