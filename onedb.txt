@@ -23,7 +23,7 @@ CREATE TABLE Stylists
 (
     stylist_name varchar(20),
     phone_number varchar(20),
-    email varchar(20),
+    email varchar(40),
     PRIMARY KEY (stylist_name)
 );
 
@@ -48,13 +48,26 @@ CREATE TABLE AvgRating
     FOREIGN KEY (stylist_name) REFERENCES Stylists(stylist_name)
 );
 
-CREATE TABLE LoginSession
-(
-    user_name varchar(15),
-    PRIMARY KEY(user_name),
-    FOREIGN KEY(user_name) REFERENCES Customer(user_name)
-);
+delimiter #
+CREATE TRIGGER insertIntoAvgRating
+AFTER INSERT ON Stylists
+FOR EACH ROW
+   BEGIN
+   INSERT INTO AvgRating (stylist_name, avg_rating) VALUES (NEW.stylist_name, 0);
+   END#
+delimiter ;
 
+
+delimiter #
+CREATE TRIGGER updateAvgRating
+AFTER UPDATE ON CustomerBooking
+FOR EACH ROW
+   BEGIN
+   UPDATE AvgRating
+   SET avg_rating = (SELECT avg(stylist_rating) from CustomerBooking where stylist_name = NEW.stylist_name AND stylist_rating > 0)
+   WHERE stylist_name = NEW.stylist_name;
+   END#
+delimiter ;
 
 INSERT INTO `HairSalon`.`Styles`
 (`style_name`,
@@ -97,7 +110,7 @@ VALUES
 'shanrc@cisco.com',
 'shanrc',
 'shanrc',
-true);
+false);
 
 INSERT INTO `HairSalon`.`Customer`
 (`fname`,
@@ -112,7 +125,7 @@ VALUES
 'shalini@cisco.com',
 'shalini',
 'shalini',
-false);
+true);
 
 INSERT INTO `HairSalon`.`CustomerBooking`
 (`booking_id`,
@@ -122,7 +135,7 @@ INSERT INTO `HairSalon`.`CustomerBooking`
 `booking_date`,
 `stylist_rating`)
 VALUES
-('1', 'shanrc', 'shaliniRC', 'pedicure', '2018', -1);
+('1', 'shanrc', 'shaliniRC', 'pedicure', '2018', 0);
 
 
 INSERT INTO `HairSalon`.`CustomerBooking`
@@ -133,4 +146,4 @@ INSERT INTO `HairSalon`.`CustomerBooking`
 `booking_date`,
 `stylist_rating`)
 VALUES
-('2', 'shanrc', 'shaliniRC', 'manicure', '2018', -1);
+('2', 'shanrc', 'shaliniRC', 'manicure', '2018', 0);

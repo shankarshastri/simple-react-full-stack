@@ -109,6 +109,7 @@ module.exports = {
           statusCode: 400,
           message: 'Stylist Already Exists'
         };
+        console.log(error);
         next(errorObj);
       } else {
         res.set({ 'Content-Type': 'application/json' });
@@ -187,6 +188,7 @@ module.exports = {
           statusCode: 400,
           message: 'Rating Update Failed'
         };
+		console.log(error);
         next(errorObj);
       } else {
         res.set({ 'Content-Type': 'application/json' });

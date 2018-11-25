@@ -5,7 +5,7 @@ const customerGetForLogin = 'SELECT user_name, password, isadmin from Customer W
 
 const stylistInsert = 'INSERT INTO Stylists(stylist_name, phone_number, email) VALUES(?, ?, ?)';
 const stylistDelete = 'DELETE FROM Stylists WHERE stylist_name=?';
-const stylistGet = 'SELECT * from Stylists';
+const stylistGet = 'SELECT stylist_name, phone_number, email, (SELECT avg_rating FROM AvgRating WHERE stylist_name=Stylists.stylist_name) AS avg_rating from Stylists';
 
 const styleInsert = 'INSERT INTO Styles(style_name, duration, rates) VALUES(?,?,?)';
 const styleUpdate = 'UPDATE Styles SET duration=?, rates=? WHERE style_name=?';
