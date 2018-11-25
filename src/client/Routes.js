@@ -11,14 +11,18 @@ import CustomerBooking from './containers/CustomerAddBooking';
 import CustomerCurrentBooking from './containers/CustomerCurrentBooking';
 import AdminAddStyles from './containers/AdminAddStyles';
 import AdminAddStylist from './containers/AdminAddStylist';
+import AdminGetStyles from './containers/AdminGetStyles';
+import AdminGetStylists from './containers/AdminGetStylists';
 
 export default ({ childProps }) => (
   <Switch>
     <AppliedRoute path="/" exact component={Home} props={childProps} />
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
     <AppliedRoute path="/admin" exact component={Admin} props={childProps} />
-    <AppliedRoute path="/admin/styles" exact component={AdminAddStyles} props={childProps} />
-    <AppliedRoute path="/admin/stylist" exact component={AdminAddStylist} props={childProps} />
+    <AppliedRoute path="/admin/addStyle" exact component={AdminAddStyles} props={childProps} />
+    <AppliedRoute path="/admin/getStyles" exact component={AdminGetStyles} props={childProps} />
+    <AppliedRoute path="/admin/addStylist" exact component={AdminAddStylist} props={childProps} />
+    <AppliedRoute path="/admin/getStylists" exact component={AdminGetStylists} props={childProps} />
     <AppliedRoute path="/admin" exact component={Admin} props={childProps} />
     <AppliedRoute path="/customer" exact component={Customer} props={childProps} />
     <AppliedRoute path="/customer/addBooking" exact component={CustomerBooking} props={childProps} />

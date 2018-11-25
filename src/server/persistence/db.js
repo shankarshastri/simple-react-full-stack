@@ -100,7 +100,7 @@ module.exports = {
     });
   },
   insertStylist(data, res, next) {
-    const inserts = [data.stylist_name, data.ratings];
+    const inserts = [data.stylist_name, data.phone_number, data.email];
     const cmd = mysql.format(DbQueryStatements.stylistInsert, inserts);
     connection.query(cmd, (error, results) => {
       if (error) {

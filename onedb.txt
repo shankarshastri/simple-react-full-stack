@@ -22,7 +22,8 @@ CREATE TABLE Styles
 CREATE TABLE Stylists
 (
     stylist_name varchar(20),
-    ratings integer,
+    phone_number varchar(20),
+    email varchar(20),
     PRIMARY KEY (stylist_name)
 );
 
@@ -55,8 +56,6 @@ CREATE TABLE LoginSession
 );
 
 
-
-// Custom SQL
 INSERT INTO `HairSalon`.`Styles`
 (`style_name`,
 `duration`,
@@ -73,15 +72,17 @@ VALUES
 
 INSERT INTO `HairSalon`.`Stylists`
 (`stylist_name`,
-`ratings`)
+`phone_number`,
+`email`)
 VALUES
-('shaliniRC', -1);
+('shaliniRC', '+918050727693', 'shalrc@cisco.com');
 
 INSERT INTO `HairSalon`.`Stylists`
 (`stylist_name`,
-`ratings`)
+`phone_number`,
+`email`)
 VALUES
-('shankarRC', -1);
+('shankarRC', '+918050727693', 'shalrc@cisco.com');
 
 INSERT INTO `HairSalon`.`Customer`
 (`fname`,

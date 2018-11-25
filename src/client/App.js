@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './app.css';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import {
+  Nav, Navbar, NavItem, NavDropdown, MenuItem
+}
+  from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import Routes from './Routes';
 
@@ -58,12 +61,14 @@ renderButtonsForCustomer() {
 renderButtonForAdmin() {
   return (
     <Fragment>
-      <LinkContainer to="/admin/stylist">
-        <NavItem>Add Stylists</NavItem>
-      </LinkContainer>
-      <LinkContainer to="/admin/styles">
-        <NavItem>Add Styles</NavItem>
-      </LinkContainer>
+      <NavDropdown title="Stylist Operations" id="nav-dropdown1" eventKey={1}>
+        <LinkContainer to="/admin/addStylist"><MenuItem eventKey={1.1}>Add Stylists</MenuItem></LinkContainer>
+        <LinkContainer to="/admin/getStylists"><MenuItem eventKey={1.2}>View Stylists</MenuItem></LinkContainer>
+      </NavDropdown>
+      <NavDropdown title="Style Operations" id="nav-dropdown2" eventKey={2}>
+        <LinkContainer to="/admin/addStyle"><MenuItem eventKey={2.1}>Add Styles</MenuItem></LinkContainer>
+        <LinkContainer to="/admin/getStyles"><MenuItem eventKey={2.2}>View Styles</MenuItem></LinkContainer>
+      </NavDropdown>
       <NavItem onClick={event => this.handleLogout(event, this.props)}>Logout</NavItem>
     </Fragment>
   );
